@@ -1,9 +1,12 @@
 import requests
 import openai
 from bs4 import BeautifulSoup
+from decouple import config
 from datetime import datetime, timedelta
-from chatgpt import analyze_hot_topic,calculate_global_impact_score
+import json
+from chatgpt import analyze_hot_topic, calculate_global_impact_score
 
+NEWSAPI_KEY = config("NEWSAPI_KEY")
 def get_text_from_url(url):
     try:
         headers = {"User-Agent": "Mozilla/5.0"}
@@ -30,22 +33,12 @@ def get_text_from_url(url):
     except Exception as e:
         print(e)
 
-def get_hot_global_news():
+def get_hot_global_news(from_date, to_date):
     try:
-        # Get today's date
-        today = datetime.today()
-
-        # Get the date two days ago
-        two_days_ago = today - timedelta(days=2)
-
-        # Format the dates as "YYYY-MM-DD"
-        today_str = today.strftime("%Y-%m-%d")
-        two_days_ago_str = two_days_ago.strftime("%Y-%m-%d")
-
         params = {
             "q": "trump OR economy OR global markets OR stock market OR finance OR inflation OR recession OR central banks OR federal reserve OR trade war OR geopolitical risk OR global economy OR china OR us economy OR europe economy OR commodities OR interest rates OR oil prices OR cryptocurrency",
-            "from": two_days_ago_str,
-            "to": today_str,
+            "from": from_date,
+            "to": to_date,
             "language": "en",
             "sortBy": "popuplarity",
             "pageSize": 20,
@@ -79,35 +72,41 @@ def calculate_global_influence_score(articles):
         print("CHATGPT FINISHED ARTICLE NUMBER %s" % i)
     return articles
 
-def get_hot_topics():
-    articles = get_hot_global_news()
+def get_hot_topics(from_date, to_date):
+    articles = get_hot_global_news(from_date, to_date)
     articles = calculate_global_influence_score(articles)
-    articles = [item for item in articles if float(item["global_influence_score"]) > 40][:5]
+    articles = [item for item in articles if float(item["global_influence_score"]) > 40][:4]
     articles = sorted(articles, key=lambda article: article['global_influence_score'], reverse=True)
-    return articles
+
+    chatgpt_results = []
+    for article in articles:
+        content = get_text_from_url(article["url"])
+        chatgpt_result = json.loads(analyze_hot_topic(content))
+        chatgpt_results.append(chatgpt_result)
+    return chatgpt_results
 
 
-articles = get_hot_global_news()
-articles = calculate_global_influence_score(articles)
-articles = [item for item in articles if float(item["global_influence_score"]) > 40]
-articles = sorted(articles, key=lambda article: article['global_influence_score'], reverse=True)
+# articles = get_hot_global_news()
+# articles = calculate_global_influence_score(articles)
+# articles = [item for item in articles if float(item["global_influence_score"]) > 40]
+# articles = sorted(articles, key=lambda article: article['global_influence_score'], reverse=True)
 
-for article in articles:
-    print("------------------------------------------")
-    print(article["title"])
-    print(article["url"])
-    print(article["publishedAt"])
-    print(article["source"]["name"])
-    print(article["global_influence_score"])
+# for article in articles:
+#     print("------------------------------------------")
+#     print(article["title"])
+#     print(article["url"])
+#     print(article["publishedAt"])
+#     print(article["source"]["name"])
+#     print(article["global_influence_score"])
 
-print("------------------------------------")
-print(articles[1]["url"])
-print("------------------------------------")
-content = get_text_from_url(articles[0]["url"])
-print("------------------------------------")
-print(content)
-print("------------------------------------")
-result = analyze_hot_topic(content)
-print(type(result))
-print("------------------------------------")
-print(result)
+# print("------------------------------------")
+# print(articles[1]["url"])
+# print("------------------------------------")
+# content = get_text_from_url(articles[0]["url"])
+# print("------------------------------------")
+# print(content)
+# print("------------------------------------")
+# result = analyze_hot_topic(content)
+# print(type(result))
+# print("------------------------------------")
+# print(result)

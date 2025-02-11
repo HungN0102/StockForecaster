@@ -106,6 +106,8 @@ class Report(models.Model):
 
 
 class HotTopic(models.Model):
+    title = models.TextField(blank=True,null=True) # Title of the newspaper  
+
     description = models.TextField(blank=True,null=True) # Description of the newspaper  
 
     topic_1 = models.TextField(blank=True,null=True) # First topic in the news 

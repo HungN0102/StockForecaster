@@ -1,7 +1,9 @@
 from django.contrib import admin
 from openai import OpenAI
+from decouple import config
 import os
 
+CHATGPT_KEY = config("CHATGPT_KEY")
 def calculate_global_impact_score(article_title, article_description):
     client = OpenAI(
         api_key = CHATGPT_KEY
@@ -39,6 +41,8 @@ def analyze_hot_topic(article):
     Audience are the people who trade consistenly.
     {article}
     Please return a JSON object with the following fields:
+    - title: A short title of the article.
+
     - description: A short summary of the article.
     
     - topic_1, background_topic_1, influence_topic_1
