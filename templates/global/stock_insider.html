@@ -1,0 +1,173 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/global/global_styles.css' %}">
+{% endblock %}
+
+{% block title %}
+StockForecaster: Stock Listings
+{% endblock%}
+
+
+{% block result %}
+<section class="section-result">    
+    <div class="form-group mt-small">
+        <div class="form-select">
+            <select id="company1" class="js-states form-control">
+                <option></option>
+                <option>Javascript</option>
+                <option>PHP</option>
+                <option>Visual Basic</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="result-header result-header--big">
+        <h2>Upcoming Stock Listings</h2>
+    </div>
+
+    <span class="mt-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+
+    <div class="result-header result-header--small mt-small">
+        <h3>Insider Purchases Last 6 Months</h2>
+    </div>
+    <div class="result-data table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Transactions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><strong>Purchases</strong></th>
+                    <td>11,715,108</td>
+                    <td>29</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Sales</strong></th>
+                    <td>12,413,401</td>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Net Shares Purchased (Sold)</strong></th>
+                    <td>-698,293</td>
+                    <td>55</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Total Insider Shares Held</strong></th>
+                    <td>6.79M</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>% Net Shares Purchased (Sold)</strong></th>
+                    <td>-0.80%</td>
+                    <td>--</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+
+
+    <div class="result-header result-header--small mt-medium">
+        <h3>Insider Transactions Reported - Last Two Years</h2>
+    </div>
+    <div class="result-data table-responsive mb-medium">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Insider</th>
+                    <th scope="col">Transaction	</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+                <tr>
+                    <th scope="row">Feb 3, 2025</th>
+                    <td>BLITZER MICHAEL - Director</td>
+                    <td>Conversion of Exercise of derivative security at price 11.50 per share.</td>
+                    <td>Direct</td>
+                    <td>20,700,000</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+
+</section>
+{% endblock %}

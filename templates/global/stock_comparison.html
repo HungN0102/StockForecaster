@@ -1,0 +1,222 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/global/global_styles.css' %}">
+{% endblock %}
+
+{% block title %}
+StockForecaster: Stock Listings
+{% endblock%}
+
+
+{% block result %}
+<section class="section-result">
+    <div class="form-group mt-small form-center">
+        <div class="form-select">
+            <select id="company1" class="js-states form-control">
+                <option></option>
+                <option>Javascript</option>
+                <option>PHP</option>
+                <option>Visual Basic</option>
+            </select>
+        </div>
+    
+        <span style="padding-bottom: 5px"><strong>Vs</strong></span>
+    
+        <div class="form-select">
+            <select id="company2" class="js-states form-control">
+                <option></option>
+                <option>Javascript</option>
+                <option>PHP</option>
+                <option>Visual Basic</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="result-header result-header--big">
+        <h2>Stock Comparison</h2>
+    </div>
+    <span class="mt-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>1. Fundamental Analysis</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Metric</th>
+                        <th scope="col">Amazon (AMZN)</th>
+                        <th scope="col">Microsoft (MSFT)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Market</th>
+                        <td>£2.45 trillion USD</td>
+                        <td>£3.36 trillion USD</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sales</th>
+                        <td>£574.79 billion USD</td>
+                        <td>£88.14 billion USD</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Net Income</th>
+                        <td>£30.43 billion USD</td>
+                        <td>£88.14 billion USD</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Discounted Cash Flow Fair Value</th>
+                        <td>£175.74</td>
+                        <td>£566.04</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Peter Lynch Fair Value</th>
+                        <td>£125.35</td>
+                        <td>£174.67</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Economic Value Added Fair Value</th>
+                        <td>£125.25</td>
+                        <td>£126.67</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Average Fair Value</th>
+                        <td>£115.25</td>
+                        <td>£136.67</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Return on Equity</th>
+                        <td>15.07%</td>
+                        <td>32.83%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Profit Margin</th>
+                        <td>6.53%</td>
+                        <td>43.97%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Debt to Equity Ratio</th>
+                        <td>0.67</td>
+                        <td>0.31</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Earnings Per Share</th>
+                        <td>£4.78</td>
+                        <td>£12.17</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Annual Dividend</th>
+                        <td>£0</td>
+                        <td>£3.08</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Shareholders Yield</th>
+                        <td>0.29%</td>
+                        <td>0.55%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Altman Z-Score</th>
+                        <td>5.58 (Indicates strong financial health)</td>
+                        <td>9.49 (Indicates strong financial health)</td>
+                    </tr>
+                </tbody>
+            </table>          
+        </div>
+    </div>
+
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>2. Solidity Analysis</h2>
+        </div>
+
+        <div class="data-item">
+            <ul class="item-information-list">
+                <li><strong>Altman Z-score:</strong> Both companies have high Altman Z-scores, indicating they are financially healthy and have a low risk of bankruptcy</li>        
+            </ul>
+        </div>
+    </div>
+
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>3. Statistical and Technical Analysis</h2>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">1. Amazon (AMZN)</div>
+            <ul class="item-information-list">
+                <li>Amazon hits record highs demand grows.</li>
+                <li>Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">2. Microsoft (MSFT)</div>
+            <ul class="item-information-list">
+                <li>Microsoft hits record highs demand grows.</li>
+                <li>Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>4. Long-term Growth Prospects</h2>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">1. Amazon (AMZN)</div>
+            
+            <ul class="item-information-list">
+                <li><strong>Strengths</strong></li>
+                <ul class="item-information-list">
+                    <li>Leader in e-commerce with a massive logistics network</li>
+                    <li>Strong growth in AWS which is highly profitable </li>
+                    <li>Expanding into advertising and subscription services </li>
+                </ul>
+            </ul>
+
+            <ul class="item-information-list">
+                <li><strong>Weakness</strong></li>
+                <ul class="item-information-list">
+                    <li>Leader in e-commerce with a massive logistics network</li>
+                    <li>Strong growth in AWS which is highly profitable </li>
+                </ul>
+            </ul>
+        </div>
+
+        <div class="data-item mt-medium">
+            <div class="item-name">2. Microsoft (MSFT)</div>
+            
+            <ul class="item-information-list">
+                <li><strong>Strengths</strong></li>
+                <ul class="item-information-list">
+                    <li>Leader in e-commerce with a massive logistics network</li>
+                    <li>Strong growth in AWS which is highly profitable </li>
+                    <li>Expanding into advertising and subscription services </li>
+                </ul>
+            </ul>
+
+            <ul class="item-information-list">
+                <li><strong>Weakness</strong></li>
+                <ul class="item-information-list">
+                    <li>Leader in e-commerce with a massive logistics network</li>
+                    <li>Strong growth in AWS which is highly profitable </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>5. Conclustion</h2>
+        </div>
+        <span class="mt-small mb-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+
+    </div>
+</section>
+{% endblock %}

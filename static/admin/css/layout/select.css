@@ -1,0 +1,19 @@
+.select2-selection__arrow b{
+    display:none !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    display: none;
+}
+
+.select2-dropdown.select2-dropdown--below {
+    top: -10px;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 40px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding: .4rem 1.5rem !important;
+}

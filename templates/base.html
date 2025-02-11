@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{% block title %} StockForecaster {% endblock %}</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+      <link rel="stylesheet" href="{% static 'css/layout/layout.css' %}">    
+      <link rel="stylesheet" href="{% static 'css/layout/buttons.css' %}">
+      <link rel="stylesheet" href="{% static 'css/layout/select.css' %}">
+
+     <!-- Select2 CSS -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+      {% block styles %}
+      
+      {% endblock%}
+  </head>
+  <body>
+    <header class="header-area">
+      <nav class="navbar navbar-inverse">
+        <div class="container container-fluid">
+          <!-- Brand (always visible) -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand" href="{% url 'index' %}">StockForecaster</a>
+          </div>
+          
+          <!-- Collapsible part -->
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class=""><a href="{% url 'global_home' %}">Global News</a></li>
+              <li><a href="#">Personal Insights</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="main-area container">
+        {% block content %}
+        <section class="section-topic">
+
+          <div class="topic-box">
+            <span>Hi <strong>Hung Nguyen</strong>, how can I help you today?</span>
+            {% comment %} <div class="d-flex flex-wrap gap-2 justify-content-center">
+              <a class="btn topic-btn" href="{% url 'global_report' %}">🌍 What's going on around the World?</a>
+            </div> {% endcomment %}
+          </div>
+
+          <div class="topic-box">
+            <h5>Hot Topics</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="Why is everybody talking about quantum computers?"|slugify|lower %}">🔥 Why is everybody talking about quantum computers?</a>
+              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="Trump's Presidency: Winners & Losers"|slugify|lower %}">🔥 Trump's Presidency: Winners & Losers</a>
+              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="List of Quantum ETFs"|slugify|lower %}">🔥 List of Quantum ETFs</a>
+              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="Trump Team & Market Impact"|slugify|lower %}">🔥 Trump Team & Market Impact</a>
+            </div>
+          </div>
+
+          <div class="topic-box">
+            <h5>News</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn topic-btn" href="{% url 'global_stock_listings' %}">📰 Upcoming Stock Listings</a>
+            </div>
+          </div>
+
+          <div class="topic-box">
+            <h5>Stocks</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn topic-btn" href="{% url 'global_stock_comparison' %}"> 📊 Stock comparison</a>
+              <a class="btn topic-btn" href="{% url 'global_stock_analysis' %}">📈 Buy or Sell?</a>
+              <a class="btn topic-btn" href="{% url 'global_stock_insider' %}">📈 Insider Transactions </a>
+            </div>
+          </div>
+        </section>
+
+        {% block result %}
+
+        {% endblock %}
+        {% endblock %}
+    </main>
+    <footer class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 footer-block">
+              <h5 class="footer-title">Quick Links</h5>
+              <ul class="footer-links">
+                <li><a href="#" class="link">About Us</a></li>
+                <li><a href="#" class="link">Contact Us</a></li>
+                <li><a href="#" class="link">Pricing</a></li>
+                <li><a href="#" class="link">Become a Member</a></li>
+              </ul>
+          </div>
+          <div class="col-lg-4 footer-block">
+            <h5 class="footer-title">Need Help?</h5>
+            <ul class="footer-links">
+              <li><a href="#" class="link">How to Use</a></li>
+              <li><a href="#" class="link">Help Center</a></li>
+              <li><a href="#" class="link">Terms of Service</a></li>
+              <li><a href="#" class="link">Contact Information</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 footer-block">
+            <h5 class="footer-title">StockForecaster</h5>
+            <span class="footer-description">Our mission is to empower traders and investors with data-driven forecasts, AI-powered insights, and real-time market analysis to make informed decisions and stay ahead in the stock market.</span>
+            <span class="footer-description">hello@storeforecaster.com</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="{% static 'js/layout/select.js' %}"></script>
+  </body>
+</html>

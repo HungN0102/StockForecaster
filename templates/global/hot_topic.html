@@ -1,0 +1,79 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/global/global_styles.css' %}">
+{% endblock %}
+
+{% block title %}
+StockForecaster: {{hot_topic}}
+{% endblock%}
+
+
+{% block result %}
+<section class="section-result">
+    <div class="result-header result-header--big">
+        <h2>{{hot_topic}}</h2>
+    </div>
+    <span class="mt-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+
+    <div class="result-data">
+        <div class="data-item">
+            <div class="item-name">1. Tesla Inc. (TSLA)</div>
+            <ul class="item-information-list">
+                <li><strong>Background:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Potential Influence:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">2. Apple Inc. (APPL)</div>
+            <ul class="item-information-list">
+                <li><strong>Background:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Potential Influence:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">3. Microsoft Corp. (MSFT)</div>
+            <ul class="item-information-list">
+                <li><strong>Background:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Potential Influence:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>Potential Sectors and Beneficial Assets</h2>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Sector</th>
+                        <th scope="col">Beneficial Stocks/Assets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Politics</th>
+                        <td>Republican Party Stocks</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Defense</th>
+                        <td>Raytheon Techonologies, Lockheed Martin</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Technology</th>
+                        <td>Apple, Tesla</td>
+                    </tr>
+                </tbody>
+            </table>        
+        </div>
+    </div>
+
+</section>
+{% endblock %}

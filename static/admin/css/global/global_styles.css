@@ -1,0 +1,90 @@
+.section-result .form-group {
+
+}
+
+    .section-result .form-group.form-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .section-result .form-group .form-select{
+        position: relative;
+        width: 150px;
+    }
+
+    .section-result .form-group .selection{
+        width: 150px;
+    }
+
+.section-result .result-header {
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    padding-bottom: 2rem;
+}
+
+    .section-result .result-header--big {
+        height: 5rem;
+        padding: .7rem 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .section-result .result-header--small {
+        padding: .7rem 1rem;
+        display: inline-block;  
+        margin-top: 1rem;
+    }
+
+    .section-result .result-header h2 {
+        font-size: 2rem;
+    }
+
+    .section-result .result-header h3 {
+        font-size: 1.4rem;
+    }
+
+.section-result .result-data {
+}
+
+    .section-result .result-data.page-divider{
+        border-top: 1px solid #cacaca;
+        padding-top: 1.5rem;
+    }
+
+    .section-result .result-data .data-item {
+        margin: 2rem 0;
+    }
+
+    .section-result .result-data .data-item .item-name{
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: .5rem;
+    }
+
+    .section-result .result-data .data-item .item-information-list{
+        list-style: disc;
+        margin-left: 2.5rem;
+        line-height: 2.25;
+    }
+
+    .section-result .result-data .data-item .item-information-list li {
+
+    }
+
+.section-result table {
+    margin-top: 2rem;
+}
+    .section-result table thead {
+        background-color: black;
+        color: white;
+    }
+
+    .section-result table tr th {
+        border-bottom: 0 !important;
+        font-weight: 600;
+    }

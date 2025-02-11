@@ -1,0 +1,77 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/global/global_styles.css' %}">
+{% endblock %}
+
+{% block title %}
+StockForecaster: Stock Listings
+{% endblock%}
+
+
+{% block result %}
+<section class="section-result">
+    <div class="form-group mt-small">
+        <div class="form-select">
+            <select id="company1" class="js-states form-control">
+                <option></option>
+                <option>Javascript</option>
+                <option>PHP</option>
+                <option>Visual Basic</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="result-header result-header--big">
+        <h2>Stock Analysis: Buy or Sell</h2>
+    </div>
+    
+    <span class="mt-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+    
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>Short Term (Maximum 1 month):</h2>
+        </div>
+    
+        <div class="data-item">
+            <ul class="item-information-list">
+                <li><strong>Rating: 7.10</strong></li>
+                <li><strong>Average Price Target: $164.25</strong> based on analyst estimates for the end of December 2024</li>
+                <li><strong>Rationale:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aliquid consequuntur eos totam veniam nesciunt error, doloribus sequi modi. Facere molestias magnam debitis! Quidem quisquam eligendi ipsa alias harum eveniet? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate soluta eveniet laboriosam velit provident similique, earum quis suscipit. Natus assumenda voluptatem ducimus odio officiis quos. Quibusdam laborum reiciendis accusantium ab.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>Medium Term (6-12 Months):</h2>
+        </div>
+    
+        <div class="data-item">
+            <ul class="item-information-list">
+                <li><strong>Rating: 7.10</strong></li>
+                <li><strong>Average Price Target: $164.25</strong> based on analyst estimates for the end of December 2024</li>
+                <li><strong>Rationale:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aliquid consequuntur eos totam veniam nesciunt error, doloribus sequi modi. Facere molestias magnam debitis! Quidem quisquam eligendi ipsa alias harum eveniet? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate soluta eveniet laboriosam velit provident similique, earum quis suscipit. Natus assumenda voluptatem ducimus odio officiis quos. Quibusdam laborum reiciendis accusantium ab.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>Long Term (2-5 Years):</h2>
+        </div>
+    
+        <div class="data-item">
+            <ul class="item-information-list">
+                <li><strong>Rating: 7.10</strong></li>
+                <li><strong>Average Price Target: $164.25</strong> based on analyst estimates for the end of December 2024</li>
+                <li><strong>Rationale:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aliquid consequuntur eos totam veniam nesciunt error, doloribus sequi modi. Facere molestias magnam debitis! Quidem quisquam eligendi ipsa alias harum eveniet? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate soluta eveniet laboriosam velit provident similique, earum quis suscipit. Natus assumenda voluptatem ducimus odio officiis quos. Quibusdam laborum reiciendis accusantium ab.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

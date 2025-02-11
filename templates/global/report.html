@@ -1,0 +1,140 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/global/global_styles.css' %}">
+{% endblock %}
+
+{% block title %}
+StockForecaster: Global News
+{% endblock%}
+
+
+{% block result %}
+<section class="section-result">
+    <div class="result-header result-header--big">
+        <h2>What's going on around the World?</h2>
+    </div>
+    <span class="mt-small">Here are the latest news items that could influence financial markets, along with their potential impact by geographical area, stocks affected, and implications for major companies</span>
+
+    <div class="result-data">
+        <div class="result-header result-header--small">
+            <h3>Geographical Analysis of Significant News Items</h2>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">1. United States</div>
+            <ul class="item-information-list">
+                <li><strong>News Item:</strong> The Fed likely to cut rates, but some worry it may not be the right move, according to CNBC survey.</li>
+                <ul class="item-information-list">
+                    <li><strong>Stock Exchange:</strong> NYSC/NASDAQ (USA)</li>
+                    <li><strong>Impact:</strong> This news could lead to a positive impact on stock prices as rate cuts typically lower borrowing costs and boost spending.</li>
+                    <li><strong>Affected Stocks:</strong></li>
+                    <ul class="item-information-list">
+                        <li><strong>Apple Inc. (AAPL):</strong> Potentially positive as lower rates may boost consumer spending</li>
+                        <li><strong>Amazon.com Inc. (AMZN):</strong> Positive as it may enhance online shopping due to cheaper credit</li>
+                        <li><strong>Tesla Inc. (TSLA):</strong> Positive impact expected as auto loans might become cheaper</li>
+                    </ul>
+                </ul>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">1. Canada</div>
+            <ul class="item-information-list">
+                <li><strong>News Item:</strong> The Fed likely to cut rates, but some worry it may not be the right move, according to CNBC survey.</li>
+                <ul class="item-information-list">
+                    <li><strong>Stock Exchange:</strong> NYSC/NASDAQ (USA)</li>
+                    <li><strong>Impact:</strong> This news could lead to a positive impact on stock prices as rate cuts typically lower borrowing costs and boost spending.</li>
+                    <li><strong>Affected Stocks:</strong></li>
+                    <ul class="item-information-list">
+                        <li><strong>Apple Inc. (AAPL):</strong> Potentially positive as lower rates may boost consumer spending</li>
+                        <li><strong>Amazon.com Inc. (AMZN):</strong> Positive as it may enhance online shopping due to cheaper credit</li>
+                        <li><strong>Tesla Inc. (TSLA):</strong> Positive impact expected as auto loans might become cheaper</li>
+                    </ul>
+                </ul>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">1. United Kingdom</div>
+            <ul class="item-information-list">
+                <li><strong>News Item:</strong> The Fed likely to cut rates, but some worry it may not be the right move, according to CNBC survey.</li>
+                <ul class="item-information-list">
+                    <li><strong>Stock Exchange:</strong> NYSC/NASDAQ (USA)</li>
+                    <li><strong>Impact:</strong> This news could lead to a positive impact on stock prices as rate cuts typically lower borrowing costs and boost spending.</li>
+                    <li><strong>Affected Stocks:</strong></li>
+                    <ul class="item-information-list">
+                        <li><strong>Apple Inc. (AAPL):</strong> Potentially positive as lower rates may boost consumer spending</li>
+                        <li><strong>Amazon.com Inc. (AMZN):</strong> Positive as it may enhance online shopping due to cheaper credit</li>
+                        <li><strong>Tesla Inc. (TSLA):</strong> Positive impact expected as auto loans might become cheaper</li>
+                    </ul>
+                </ul>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="result-data page-divider">
+        <div class="result-header result-header--small">
+            <h3>Major Companies with Highest Capitalization</h2>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">1. Tesla Inc. (TSLA)</div>
+            <ul class="item-information-list">
+                <li><strong>News:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Impact:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">2. Apple Inc. (APPL)</div>
+            <ul class="item-information-list">
+                <li><strong>News:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Impact:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">3. Microsoft Corp. (MSFT)</div>
+            <ul class="item-information-list">
+                <li><strong>News:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Impact:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="result-data page-divider">
+        <div class="result-header result-header--small">
+            <h3>Minor Companies with Highest Growth Potential</h2>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">1. Tesla Inc. (TSLA)</div>
+            <ul class="item-information-list">
+                <li><strong>News:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Impact:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">2. Apple Inc. (APPL)</div>
+            <ul class="item-information-list">
+                <li><strong>News:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Impact:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+
+        <div class="data-item">
+            <div class="item-name">3. Microsoft Corp. (MSFT)</div>
+            <ul class="item-information-list">
+                <li><strong>News:</strong> Tesla hits record highs demand grows.</li>
+                <li><strong>Impact:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
