@@ -106,6 +106,7 @@ class Report(models.Model):
 
 
 class HotTopic(models.Model):
+    group_id = models.IntegerField(unique=True, editable=False)
     title = models.TextField(blank=True,null=True) # Title of the newspaper  
 
     description = models.TextField(blank=True,null=True) # Description of the newspaper  
