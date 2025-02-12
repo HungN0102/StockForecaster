@@ -74,3 +74,37 @@ def analyze_hot_topic(article):
     )
 
     return chat_completion.choices[0].message.content
+
+
+
+
+
+
+def filter_similar_articles(article_titles):
+    client = OpenAI(
+        api_key = CHATGPT_KEY
+    )
+
+    titles_str = "\n".join(article_titles)
+
+    prompt = f"""
+    Please analyze the following article titles and remove any duplicates with similar meanings. 
+    The titles are:
+
+    {titles_str}
+
+    Return a list of the unique titles, each on a new line, without any explanation.
+    """
+
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model="gpt-4-turbo",
+    )
+    result = chat_completion.choices[0].message.content
+    return result.split("\n")
+

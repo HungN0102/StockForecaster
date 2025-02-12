@@ -14,7 +14,8 @@ StockForecaster: Global News
 {% block result %}
 <section class="section-result">
     <div class="result-header result-header--big">
-        <h2>What's going on around the World?</h2>
+        {% comment %} <h2>What's going on around the World?</h2> {% endcomment %}
+        <h2>{{ message }}</h2>
     </div>
     <span class="mt-small">Here are the latest news items that could influence financial markets, along with their potential impact by geographical area, stocks affected, and implications for major companies</span>
 

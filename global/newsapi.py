@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from decouple import config
 from datetime import datetime, timedelta
 import json
-from chatgpt import analyze_hot_topic, calculate_global_impact_score
+from .chatgpt import analyze_hot_topic, calculate_global_impact_score,filter_similar_articles
 
 NEWSAPI_KEY = config("NEWSAPI_KEY")
 def get_text_from_url(url):
@@ -83,7 +83,27 @@ def get_hot_topics(from_date, to_date):
         content = get_text_from_url(article["url"])
         chatgpt_result = json.loads(analyze_hot_topic(content))
         chatgpt_results.append(chatgpt_result)
-    return chatgpt_results
+
+
+    """
+    Filters out dictionaries with duplicate titles.
+    
+    :param data_dict: A list of dictionaries where each dictionary has a "title" key.
+    :return: A list of dictionaries with unique titles.
+    """
+    seen_titles = set()
+    unique_articles = []
+
+    for entry in chatgpt_results:
+        title = entry["title"]
+        if title not in seen_titles:
+            seen_titles.add(title)
+            unique_articles.append(entry)
+
+    unique_titles = [item["title"] for item in unique_articles]
+    filtered_titles = filter_similar_articles(unique_titles)
+    filtered_articles = [article for article in unique_articles if article["title"] in filtered_titles]
+    return filtered_articles
 
 
 # articles = get_hot_global_news()
