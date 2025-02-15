@@ -1,5 +1,5 @@
 import finnhub
-from global.models import HotTopic
+from article.models import HotTopic
 
 finnhub_client = finnhub.Client(api_key="cuo888pr01qokt75ltcgcuo888pr01qokt75ltd0")
 

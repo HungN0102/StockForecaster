@@ -37,7 +37,7 @@
           <!-- Collapsible part -->
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <li class=""><a href="{% url 'global_home' %}">Global News</a></li>
+              <li class=""><a href="{% url 'article_home' %}">Global News</a></li>
               <li><a href="#">Personal Insights</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -55,7 +55,7 @@
           <div class="topic-box">
             <span>Hi <strong>Hung Nguyen</strong>, how can I help you today?</span>
             <div class="d-flex flex-wrap gap-2 justify-content-center">
-              <a class="btn topic-btn" href="{% url 'global_report' %}">🌍 Get Latest Hot Topics</a>
+              <a class="btn topic-btn" href="{% url 'article_report' %}">🌍 Get Latest Hot Topics</a>
             </div> 
           </div>
 
@@ -63,7 +63,7 @@
             <h5>Hot Topics</h5>
             <div class="d-flex flex-wrap gap-2">
               {% for hot_topic in latest_hottopics %}
-                <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' id=hot_topic.id %}">🔥 {{hot_topic.title}}</a>
+                <a class="btn hot-topic-btn" href="{% url 'article_hot_topic' id=hot_topic.id %}">🔥 {{hot_topic.title}}</a>
               {% endfor %}
              </div>
           </div>
@@ -71,16 +71,16 @@
           <div class="topic-box">
             <h5>News</h5>
             <div class="d-flex flex-wrap gap-2">
-              <a class="btn topic-btn" href="{% url 'global_stock_listings' %}">📰 Upcoming Stock Listings</a>
+              <a class="btn topic-btn" href="{% url 'article_stock_listings' %}">📰 Upcoming Stock Listings</a>
             </div>
           </div>
 
           <div class="topic-box">
             <h5>Stocks</h5>
             <div class="d-flex flex-wrap gap-2">
-              <a class="btn topic-btn" href="{% url 'global_stock_comparison' %}"> 📊 Stock comparison</a>
-              <a class="btn topic-btn" href="{% url 'global_stock_analysis' %}">📈 Buy or Sell?</a>
-              <a class="btn topic-btn" href="{% url 'global_stock_insider' %}">📈 Insider Transactions </a>
+              <a class="btn topic-btn" href="{% url 'article_stock_comparison' %}"> 📊 Stock comparison</a>
+              <a class="btn topic-btn" href="{% url 'article_stock_analysis' %}">📈 Buy or Sell?</a>
+              <a class="btn topic-btn" href="{% url 'article_stock_insider' %}">📈 Insider Transactions </a>
             </div>
           </div>
         </section>
