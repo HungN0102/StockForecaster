@@ -68,7 +68,7 @@ def get_hot_article_news(from_date, to_date):
 def calculate_article_influence_score(articles):
     for i, article in enumerate(articles):
         article_influence_score = calculate_article_impact_score(article["title"], article["description"])
-        articles[i]["artcile_influence_score"] = float(article_influence_score)
+        articles[i]["article_influence_score"] = float(article_influence_score)
         print("CHATGPT FINISHED ARTICLE NUMBER %s" % i)
     return articles
 
