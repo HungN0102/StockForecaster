@@ -12,27 +12,20 @@ def global_home(request):
 def global_report(request):
     try:
         dict_ = {"message": "Init"}
-        group_id = 1
         # Get today's date
-        today = datetime.today()
-        two_days_ago = today - timedelta(days=2)
-        # Format the dates as "YYYY-MM-DD"
-        to_date = today.strftime("%Y-%m-%d")
-        from_date = two_days_ago.strftime("%Y-%m-%d")
-
+        to_date = datetime.today().strftime("%Y-%m-%d")
+        from_date = (datetime.today() - timedelta(days=1)).strftime("%Y-%m-%d")
         last_hottopic = HotTopic.objects.order_by('-created_at').first()
-        if is_last_hottopic_old(last_hottopic):
-            if last_hottopic is not None:
-                group_id = last_hottopic.group_id
+        group_id = 1 if last_hottopic is None else last_hottopic.group_id + 1
 
+        if is_last_hottopic_old(last_hottopic):
             dict_["message"] = "Calling articles = get_hot_topics(%s, %s)" % (from_date, to_date)
             articles = get_hot_topics(from_date, to_date)
 
-            dict_["message"] = "Filter articles with unique meaning"
-            articles = get_hot_topics(from_date, to_date)
-
             dict_["message"] = "Inserting articles to database"
+            print("Number of articles: %s" % len(articles))
             for article in articles:
+                print("Inserting Article: %s" % article["title"])
                 HotTopic.objects.create(
                     group_id = group_id,
                     title = article["title"],
@@ -68,9 +61,9 @@ def global_report(request):
 def global_stock_listings(request):
     return render(request, 'global/stock_listings.html')
 
-def global_hot_topic(request, hot_topic):
-    formatted_topic = hot_topic.replace('-',' ').title()
-    return render(request, 'global/hot_topic.html',{'hot_topic': formatted_topic})
+def global_hot_topic(request, id):
+    hot_topic = HotTopic.objects.filter(id=id).first()    
+    return render(request, 'global/hot_topic.html',{'hot_topic': hot_topic})
 
 def global_stock_comparison(request):
     return render(request, 'global/stock_comparison.html')

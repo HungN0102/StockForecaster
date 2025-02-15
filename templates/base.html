@@ -62,11 +62,10 @@
           <div class="topic-box">
             <h5>Hot Topics</h5>
             <div class="d-flex flex-wrap gap-2">
-              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="Why is everybody talking about quantum computers?"|slugify|lower %}">🔥 Why is everybody talking about quantum computers?</a>
-              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="Trump's Presidency: Winners & Losers"|slugify|lower %}">🔥 Trump's Presidency: Winners & Losers</a>
-              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="List of Quantum ETFs"|slugify|lower %}">🔥 List of Quantum ETFs</a>
-              <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' hot_topic="Trump Team & Market Impact"|slugify|lower %}">🔥 Trump Team & Market Impact</a>
-            </div>
+              {% for hot_topic in latest_hottopics %}
+                <a class="btn hot-topic-btn" href="{% url 'global_hot_topic' id=hot_topic.id %}">🔥 {{hot_topic.title}}</a>
+              {% endfor %}
+             </div>
           </div>
 
           <div class="topic-box">

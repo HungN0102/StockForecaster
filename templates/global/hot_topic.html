@@ -14,32 +14,32 @@ StockForecaster: {{hot_topic}}
 {% block result %}
 <section class="section-result">
     <div class="result-header result-header--big">
-        <h2>{{hot_topic}}</h2>
+        <h2>{{hot_topic.title}}</h2>
     </div>
-    <span class="mt-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+    <span class="mt-small">{{hot_topic.description}}</span>
 
     <div class="result-data">
         <div class="data-item">
-            <div class="item-name">1. Tesla Inc. (TSLA)</div>
+            <div class="item-name">1. {{hot_topic.topic_1}}</div>
             <ul class="item-information-list">
-                <li><strong>Background:</strong> Tesla hits record highs demand grows.</li>
-                <li><strong>Potential Influence:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+                <li><strong>Background:</strong> {{hot_topic.background_topic_1}}</li>
+                <li><strong>Potential Influence:</strong> {{hot_topic.influence_topic_1}}</li>
             </ul>
         </div>
 
         <div class="data-item">
-            <div class="item-name">2. Apple Inc. (APPL)</div>
+            <div class="item-name">2. {{hot_topic.topic_2}}</div>
             <ul class="item-information-list">
-                <li><strong>Background:</strong> Tesla hits record highs demand grows.</li>
-                <li><strong>Potential Influence:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+                <li><strong>Background:</strong> {{hot_topic.background_topic_2}}</li>
+                <li><strong>Potential Influence:</strong> {{hot_topic.influence_topic_2}}</li>
             </ul>
         </div>
 
         <div class="data-item">
-            <div class="item-name">3. Microsoft Corp. (MSFT)</div>
+            <div class="item-name">3. {{hot_topic.topic_3}}</div>
             <ul class="item-information-list">
-                <li><strong>Background:</strong> Tesla hits record highs demand grows.</li>
-                <li><strong>Potential Influence:</strong> Positive for short and medium term as strong sales projetions may uplift share prices</li>
+                <li><strong>Background:</strong> {{hot_topic.background_topic_3}}</li>
+                <li><strong>Potential Influence:</strong> {{hot_topic.influence_topic_3}}</li>
             </ul>
         </div>
     </div>
@@ -54,21 +54,25 @@ StockForecaster: {{hot_topic}}
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Sector</th>
+                        <th scope="col">Impact</th>
                         <th scope="col">Beneficial Stocks/Assets</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">Politics</th>
-                        <td>Republican Party Stocks</td>
+                        <th scope="row">{{hot_topic.sector_1}}</th>
+                        <td>{{hot_topic.impact_1}}</td>
+                        <td>{{hot_topic.stock_1}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Defense</th>
-                        <td>Raytheon Techonologies, Lockheed Martin</td>
+                        <th scope="row">{{hot_topic.sector_2}}</th>
+                        <td>{{hot_topic.impact_2}}</td>
+                        <td>{{hot_topic.stock_2}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Technology</th>
-                        <td>Apple, Tesla</td>
+                        <th scope="row">{{hot_topic.sector_3}}</th>
+                        <td>{{hot_topic.impact_3}}</td>
+                        <td>{{hot_topic.stock_3}}</td>
                     </tr>
                 </tbody>
             </table>        
