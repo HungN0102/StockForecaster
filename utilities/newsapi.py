@@ -1,10 +1,8 @@
 import requests
-import openai
 from bs4 import BeautifulSoup
 from decouple import config
-from datetime import datetime, timedelta
 import json
-from .chatgpt import analyze_hot_topic, calculate_article_impact_score,filter_similar_articles
+from .chatgpt import *
 
 NEWSAPI_KEY = config("NEWSAPI_KEY")
 def get_text_from_url(url):
@@ -72,38 +70,6 @@ def calculate_article_influence_score(articles):
         print("CHATGPT FINISHED ARTICLE NUMBER %s" % i)
     return articles
 
-def get_hot_topics(from_date, to_date):
-    articles = get_hot_article_news(from_date, to_date)
-    articles = calculate_article_influence_score(articles)
-    articles = [item for item in articles if float(item["article_influence_score"]) > 40][:4]
-    articles = sorted(articles, key=lambda article: article['article_influence_score'], reverse=True)
-
-    chatgpt_results = []
-    for article in articles:
-        content = get_text_from_url(article["url"])
-        chatgpt_result = json.loads(analyze_hot_topic(content))
-        chatgpt_results.append(chatgpt_result)
-
-
-    """
-    Filters out dictionaries with duplicate titles.
-    
-    :param data_dict: A list of dictionaries where each dictionary has a "title" key.
-    :return: A list of dictionaries with unique titles.
-    """
-    seen_titles = set()
-    unique_articles = []
-
-    for entry in chatgpt_results:
-        title = entry["title"]
-        if title not in seen_titles:
-            seen_titles.add(title)
-            unique_articles.append(entry)
-
-    unique_titles = [item["title"] for item in unique_articles]
-    filtered_titles = filter_similar_articles(unique_titles)
-    filtered_articles = [article for article in unique_articles if article["title"] in filtered_titles]
-    return filtered_articles
 
 
 # articles = get_hot_article_news()

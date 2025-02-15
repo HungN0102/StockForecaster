@@ -1,4 +1,3 @@
-from django.contrib import admin
 from openai import OpenAI
 from decouple import config
 import os

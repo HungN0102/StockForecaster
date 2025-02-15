@@ -149,18 +149,24 @@ class HotTopic(models.Model):
     #     return reverse("property_info", kwargs={"pk": self.pk})
     
 class StockListing(models.Model):
+    group_id = models.IntegerField(editable=False)
+
     date = models.DateTimeField(auto_now_add=True)
     company = models.CharField(max_length=255)
+    code = models.CharField(max_length=255)
     business_description = models.TextField(blank=True,null=True)
     price_range = models.CharField(max_length=255)
-    market_cap = models.CharField(max_length=255)
+    total_shares_value = models.CharField(max_length=255)
+    number_of_shares = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = 'StockListing'
+        verbose_name_plural = 'StockListings'
     
     def __str__(self):
-        return 'StockListing_' + str(self.created_at)
-    
+        return self.company
 
 class InsiderTransaction(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
