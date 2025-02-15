@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from decouple import config
 from datetime import datetime, timedelta
 import json
-from .chatgpt import analyze_hot_topic, calculate_global_impact_score,filter_similar_articles
+from .chatgpt import analyze_hot_topic, calculate_article_impact_score,filter_similar_articles
 
 NEWSAPI_KEY = config("NEWSAPI_KEY")
 def get_text_from_url(url):
@@ -33,7 +33,7 @@ def get_text_from_url(url):
     except Exception as e:
         print(e)
 
-def get_hot_global_news(from_date, to_date):
+def get_hot_article_news(from_date, to_date):
     try:
         params = {
             "q": "trump OR economy OR global markets OR stock market OR finance OR inflation OR recession OR central banks OR federal reserve OR trade war OR geopolitical risk OR global economy OR china OR us economy OR europe economy OR commodities OR interest rates OR oil prices OR cryptocurrency",
@@ -65,18 +65,18 @@ def get_hot_global_news(from_date, to_date):
     except Exception as e:
         print(e)
 
-def calculate_global_influence_score(articles):
+def calculate_article_influence_score(articles):
     for i, article in enumerate(articles):
-        global_influence_score = calculate_global_impact_score(article["title"], article["description"])
-        articles[i]["global_influence_score"] = float(global_influence_score)
+        article_influence_score = calculate_article_impact_score(article["title"], article["description"])
+        articles[i]["artcile_influence_score"] = float(article_influence_score)
         print("CHATGPT FINISHED ARTICLE NUMBER %s" % i)
     return articles
 
 def get_hot_topics(from_date, to_date):
-    articles = get_hot_global_news(from_date, to_date)
-    articles = calculate_global_influence_score(articles)
-    articles = [item for item in articles if float(item["global_influence_score"]) > 40][:4]
-    articles = sorted(articles, key=lambda article: article['global_influence_score'], reverse=True)
+    articles = get_hot_article_news(from_date, to_date)
+    articles = calculate_article_influence_score(articles)
+    articles = [item for item in articles if float(item["article_influence_score"]) > 40][:4]
+    articles = sorted(articles, key=lambda article: article['article_influence_score'], reverse=True)
 
     chatgpt_results = []
     for article in articles:
@@ -106,10 +106,10 @@ def get_hot_topics(from_date, to_date):
     return filtered_articles
 
 
-# articles = get_hot_global_news()
-# articles = calculate_global_influence_score(articles)
-# articles = [item for item in articles if float(item["global_influence_score"]) > 40]
-# articles = sorted(articles, key=lambda article: article['global_influence_score'], reverse=True)
+# articles = get_hot_article_news()
+# articles = calculate_article_influence_score(articles)
+# articles = [item for item in articles if float(item["article_influence_score"]) > 40]
+# articles = sorted(articles, key=lambda article: article['article_influence_score'], reverse=True)
 
 # for article in articles:
 #     print("------------------------------------------")
@@ -117,7 +117,7 @@ def get_hot_topics(from_date, to_date):
 #     print(article["url"])
 #     print(article["publishedAt"])
 #     print(article["source"]["name"])
-#     print(article["global_influence_score"])
+#     print(article["article_influence_score"])
 
 # print("------------------------------------")
 # print(articles[1]["url"])

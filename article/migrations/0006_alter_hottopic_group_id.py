@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('global', '0005_hottopic_group_id'),
+        ('article', '0005_hottopic_group_id'),
     ]
 
     operations = [

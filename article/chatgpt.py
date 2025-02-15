@@ -4,7 +4,7 @@ from decouple import config
 import os
 
 CHATGPT_KEY = config("CHATGPT_KEY")
-def calculate_global_impact_score(article_title, article_description):
+def calculate_article_impact_score(article_title, article_description):
     client = OpenAI(
         api_key = CHATGPT_KEY
     )

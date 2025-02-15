@@ -98,7 +98,7 @@ class Report(models.Model):
         verbose_name_plural = 'Report'
     
     def __str__(self):
-        return 'GlobalReport_' + self.created_at
+        return 'ArticleReport_' + self.created_at
     
     # def get_absolute_url(self):
     #     return reverse("property_info", kwargs={"pk": self.pk})

@@ -148,7 +148,7 @@ class Migration(migrations.Migration):
                 ('transaction', models.CharField(max_length=255)),
                 ('type', models.CharField(max_length=255)),
                 ('value', models.CharField(max_length=255)),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='global.company')),
+                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='article.company')),
             ],
             options={
                 'verbose_name_plural': 'InsiderTransaction',

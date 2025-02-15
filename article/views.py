@@ -6,10 +6,10 @@ from .models import HotTopic
 from .ults import is_last_hottopic_old
 
 # Create your views here.
-def global_home(request):
-    return render(request, 'global/home.html')
+def article_home(request):
+    return render(request, 'article/home.html')
 
-def global_report(request):
+def article_report(request):
     try:
         dict_ = {"message": "Init"}
         # Get today's date
@@ -56,20 +56,20 @@ def global_report(request):
     except Exception as e:
         dict_["message"] = str(e)
 
-    return render(request, 'global/report.html', dict_)
+    return render(request, 'article/report.html', dict_)
 
-def global_stock_listings(request):
-    return render(request, 'global/stock_listings.html')
+def article_stock_listings(request):
+    return render(request, 'article/stock_listings.html')
 
-def global_hot_topic(request, id):
+def article_hot_topic(request, id):
     hot_topic = HotTopic.objects.filter(id=id).first()    
-    return render(request, 'global/hot_topic.html',{'hot_topic': hot_topic})
+    return render(request, 'article/hot_topic.html',{'hot_topic': hot_topic})
 
-def global_stock_comparison(request):
-    return render(request, 'global/stock_comparison.html')
+def article_stock_comparison(request):
+    return render(request, 'article/stock_comparison.html')
 
-def global_stock_analysis(request):
-    return render(request, 'global/stock_analysis.html')
+def article_stock_analysis(request):
+    return render(request, 'article/stock_analysis.html')
 
-def global_stock_insider(request):
-    return render(request, 'global/stock_insider.html')
+def article_stock_insider(request):
+    return render(request, 'article/stock_insider.html')
