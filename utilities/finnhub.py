@@ -4,5 +4,9 @@ FINNHUB_KEY = config("FINNHUB_KEY")
 
 def get_latest_ipo(from_date, to_date):
     finnhub_client = finnhub.Client(api_key=FINNHUB_KEY)
-    ipo_list = finnhub_client.ipo_calendar(_from="2025-02-15", to="2025-03-15")
+    ipo_list = finnhub_client.ipo_calendar(_from=from_date, to=to_date)["ipoCalendar"]
     return ipo_list
+
+
+
+get_latest_ipo("2025-02-15","2025-03-15")

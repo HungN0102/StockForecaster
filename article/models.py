@@ -151,7 +151,7 @@ class HotTopic(models.Model):
 class StockListing(models.Model):
     group_id = models.IntegerField(editable=False)
 
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.CharField()
     company = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
     business_description = models.TextField(blank=True,null=True)

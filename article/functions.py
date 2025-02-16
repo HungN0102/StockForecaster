@@ -1,8 +1,8 @@
 from datetime import timedelta, timezone, datetime
-from article.models import *
-from .chatgpt import *
-from .finnhub import *
-from .newsapi import *
+from .models import HotTopic, StockListing
+from utilities.chatgpt import *
+from utilities.finnhub import *
+from utilities.newsapi import *
 
 def is_old_enough(model, hours_ago):
     if model:
@@ -112,6 +112,7 @@ def insert_latest_stock_listings(stock_listing, from_date, to_date):
             group_id = stock_listing.group_id + 1
 
         if is_old_enough(stock_listing, check_hours_ago):
+            print("Calling stock_listings = get_latest_ipo(%s, %s)" % (from_date, to_date))
             message = "Calling stock_listings = get_latest_ipo(%s, %s)" % (from_date, to_date)
             stock_listings = get_latest_ipo(from_date, to_date)
 
@@ -133,11 +134,9 @@ def insert_latest_stock_listings(stock_listing, from_date, to_date):
 
             message = "Inserted Stock Listings to database"
         else:
-            message = "Last Stock Listing isn't more than %s hours ago, it was %s " % check_hours_ago, stock_listing.created_at
+            message = "Last Stock Listing isn't more than %s hours ago, it was %s " % (check_hours_ago, stock_listing.created_at)
 
     except Exception as e:
         message = str(e)
 
     return message
-
-insert_latest_stock_listings(None, "2025-02-15", "2025-03-15")

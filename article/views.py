@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime, timedelta
-from .models import HotTopic
-from utilities.functions import insert_latest_hot_topics
+from .models import HotTopic, StockListing
+from .functions import insert_latest_hot_topics, insert_latest_stock_listings
 
 # Create your views here.
 def article_home(request):
@@ -10,15 +10,22 @@ def article_home(request):
 
 def article_report(request):
     # Initialize Parameters for Checking and Inserting Hot Topics if Necessary 
-    to_date = datetime.today().strftime("%Y-%m-%d")
-    from_date = (datetime.today() - timedelta(days=1)).strftime("%Y-%m-%d")
-    last_hottopic = HotTopic.objects.order_by('-created_at').first()
+    today = datetime.today().strftime("%Y-%m-%d")
+    past_2days = (datetime.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+    next_1month = (datetime.today() + timedelta(days=30)).strftime("%Y-%m-%d")
 
-    message = insert_latest_hot_topics(last_hottopic, from_date, to_date)
+    # Get last hot topic, stock listing
+    last_hottopic = HotTopic.objects.order_by('-created_at').first()
+    last_stocklisting = StockListing.objects.order_by('-created_at').first()
+    
+    message = insert_latest_hot_topics(last_hottopic, past_2days, today)
+    message = insert_latest_stock_listings(last_stocklisting, today, next_1month)
     return render(request, 'article/report.html', {"message": message})
 
 def article_stock_listings(request):
-    return render(request, 'article/stock_listings.html')
+    last_stocklisting = StockListing.objects.order_by('-created_at').first()
+    last_stocklistings = StockListing.objects.filter(group_id = last_stocklisting.group_id)    
+    return render(request, 'article/stock_listings.html', {"stock_listings": last_stocklistings})
 
 def article_hot_topic(request, id):
     hot_topic = HotTopic.objects.filter(id=id).first()    

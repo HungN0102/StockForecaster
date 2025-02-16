@@ -17,7 +17,7 @@ StockForecaster: Stock Listings
         <h2>Upcoming Stock Listings</h2>
     </div>
 
-    <span class="mt-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+    <span class="mt-small">Here are some of the most important upcoming IPOs expected in the next thirty days, including company name, price ranges, expected capitalization and the expected date</span>
 
     <div class="result-data table-responsive">
         <table class="table">
@@ -25,79 +25,27 @@ StockForecaster: Stock Listings
                 <tr>
                     <th scope="col">Date</th>
                     <th scope="col">Company Name</th>
-                    <th scope="col">Core Business Description</th>
+                    <th scope="col">Code</th>
                     <th scope="col">Price Range</th>
-                    <th scope="col">Expected Market Cap</th>
+                    <th scope="col">Number Of Shares</th>
+                    <th scope="col">Total Shares Value</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
-                <tr>
-                    <th scope="row">2024-12-23</th>
-                    <td>ServiceTitan, Inc.</td>
-                    <td>Provides software solutions for home service businesses.</td>
-                    <td>$71</td>
-                    <td>$624.8m</td>
-                </tr>
+                {% for stock_listing in stock_listings %}
+                    <tr>
+                        <th scope="row">{{stock_listing.date}}</th>
+                        <td>{{stock_listing.company}}</td>
+                        <td>{{stock_listing.code}}</td>
+                        <td>{{stock_listing.price_range}}</td>
+                        <td>{{stock_listing.number_of_shares}}</td>
+                        <td>{{stock_listing.total_shares_value}}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table> 
         
-        <span class="mt-extra-small mb-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+        <span class="mt-extra-small mb-small">These listings represent a diverse range of industries, from medical devices and logistic to technology solutions and software services, offering various opportunities for potential investors. Each company's specific are outlined in terms of price and market capitalization, providing insights for prospective investment.</span>
     </div>
 
 </section>
