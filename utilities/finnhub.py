@@ -7,6 +7,16 @@ def get_latest_ipo(from_date, to_date):
     ipo_list = finnhub_client.ipo_calendar(_from=from_date, to=to_date)["ipoCalendar"]
     return ipo_list
 
+def get_latest_insider_transactions(symbol, from_date, to_date):
+    import finnhub
+    finnhub_client = finnhub.Client(api_key=FINNHUB_KEY)
+
+    insider_transactions = finnhub_client.stock_insider_transactions(symbol, from_date, to_date)
+    return insider_transactions
 
 
-get_latest_ipo("2025-02-15","2025-03-15")
+# content = get_latest_insider_transactions("LUNR", "2025-01-01","2025-02-15")
+
+# content["data"][1]
+
+# -4528 * 19.6

@@ -7,28 +7,43 @@ from datetime import datetime
 
 class Company(models.Model):
     name = models.CharField(max_length=255)
-    cod = models.CharField(max_length=255)
-    market = models.CharField(max_length=255)
-    sales = models.CharField(max_length=255)
-    net_income = models.CharField(max_length=255)
-    discounted_cash_flow_fair_value = models.CharField(max_length=255)
-    peter_lynch_fair_value = models.CharField(max_length=255)
-    economic_value_added_fair_value = models.CharField(max_length=255)
-    average_fair_value = models.CharField(max_length=255)
-    return_on_equity = models.CharField(max_length=255)
-    profit_margin = models.CharField(max_length=255)
-    debt_to_equity_ratio = models.CharField(max_length=255)
-    earnings_per_share = models.CharField(max_length=255)
-    annual_dividend = models.CharField(max_length=255)
-    shareholders_yield = models.CharField(max_length=255)
-    altman_z_score = models.CharField(max_length=255)
+    code = models.CharField(max_length=255)
+    currency = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    fiscal_date_ending = models.CharField(max_length=255, blank=True, null=True)
+    market_capitalization = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    total_revenue = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True) 
+    gross_profit =  models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    net_income = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    ebitda = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    operating_margin = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    profit_margin = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    quarterly_revenue_growth = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    quarterly_earnings_growth = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    total_assets = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    total_liabilities = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    shareholder_equity = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    current_asset_to_liability_ratio = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    debt_to_equity_ratio = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    eps = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    price_to_sales_ratio = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    ev_to_ebitda = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    week_52_high = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    week_52_low = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    day_50_moving_average = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    day_200_moving_average = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    analyst_target_price = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    peter_lynch_fair_value =models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    price_to_earnings_fair_value =models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    altman_z_score = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = 'Companies'
-    
+        db_table = 'company'  
+
     def __str__(self):
         return self.name
 
@@ -155,9 +170,9 @@ class StockListing(models.Model):
     company = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
     business_description = models.TextField(blank=True,null=True)
-    price_range = models.CharField(max_length=255)
-    total_shares_value = models.CharField(max_length=255)
-    number_of_shares = models.CharField(max_length=255)
+    price_range = models.CharField(max_length=255, blank=True, null=True)
+    total_shares_value = models.CharField(max_length=255, blank=True, null=True)
+    number_of_shares = models.CharField(max_length=255, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -171,10 +186,18 @@ class StockListing(models.Model):
 class InsiderTransaction(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    insider = models.CharField(max_length=255)
-    transaction = models.CharField(max_length=255)
-    type = models.CharField(max_length=255)
-    value = models.CharField(max_length=255)
+    insider = models.CharField(max_length=255, blank=True, null=True)
+    transaction_type = models.CharField(max_length=255, blank=True, null=True)
+
+    number_of_shares = models.IntegerField(blank=True, null=True)
+    transaction_price = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    transaction_value = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    
+    transaction_price_text = models.CharField(max_length=255, blank=True, null=True)
+    transaction_value_text = models.CharField(max_length=255, blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = 'InsiderTransaction'

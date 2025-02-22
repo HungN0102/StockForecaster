@@ -1,6 +1,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/article/article_styles.css' %}">
@@ -13,32 +14,52 @@ StockForecaster: Stock Listings
 
 {% block result %}
 <section class="section-result">
-    <div class="form-group mt-small form-center">
+    <form method="GET" class="form-group mt-small form-center" id="stock-comparison-form">
+        {% csrf_token %}
         <div class="form-select">
-            <select id="company1" class="js-states form-control">
-                <option></option>
-                <option>Javascript</option>
-                <option>PHP</option>
-                <option>Visual Basic</option>
+            <select id="company1" name="company1" class="js-states form-control select2">
+                {% for code in company_codes %}
+                    {% if code == company1.code %}
+                        <option selected value="{{code}}">{{code}}</option>
+                    {% else %}
+                        <option value="{{code}}">{{code}}</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
     
         <span style="padding-bottom: 5px"><strong>Vs</strong></span>
     
         <div class="form-select">
-            <select id="company2" class="js-states form-control">
-                <option></option>
-                <option>Javascript</option>
-                <option>PHP</option>
-                <option>Visual Basic</option>
+            <select id="company2" name="company2" class="js-states form-control select2">
+                {% for code in company_codes %}
+                    {% if code == company2.code %}
+                        <option selected value="{{code}}">{{code}}</option>
+                    {% else %}
+                        <option value="{{code}}">{{code}}</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
-    </div>
+    </form>
 
     <div class="result-header result-header--big">
         <h2>Stock Comparison</h2>
     </div>
-    <span class="mt-small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia quas, error hic ipsam nulla vero vel nihil minus quis aliquam consequuntur commodi quam. Odit ipsa quibusdam nostrum dolore minima. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, illo nulla adipisci iusto labore corporis maxime aliquam nobis error quo et eligendi perferendis autem facere ab fuga itaque saepe ratione!</span>
+    <span class="mt-small">
+        <div class="result-data">
+            <div class="data-item">
+                <div class="item-name">1. {{company1.name}} ({{company1.code}})</div>
+                <span>{{company1.description}}</span>
+            </div>
+
+            <div class="data-item">
+                <div class="item-name">2. {{company2.name}} ({{company2.code}})</div>
+                <span>{{company2.description}}</span>
+                <span></span>
+            </div>
+        </div>
+    </span>
 
     <div class="result-data">
         <div class="result-header result-header--small">
@@ -49,80 +70,130 @@ StockForecaster: Stock Listings
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Metric</th>
-                        <th scope="col">Amazon (AMZN)</th>
-                        <th scope="col">Microsoft (MSFT)</th>
+                        <th scope="col">{{company1.name}} ({{company1.code}})</th>
+                        <th scope="col">{{company2.name}} ({{company2.code}})</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">Market</th>
-                        <td>£2.45 trillion USD</td>
-                        <td>£3.36 trillion USD</td>
+                        <th scope="row">Fiscal Date Ending</th>
+                        <td>{{company1.fiscal_date_ending}}</td>
+                        <td>{{company1.fiscal_date_ending}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Sales</th>
-                        <td>£574.79 billion USD</td>
-                        <td>£88.14 billion USD</td>
+                        <th scope="row">Market Capitalization</th>
+                        <td>${{company1.market_capitalization|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.market_capitalization|format_large_number}} {{company2.currency}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Net Income</th>
-                        <td>£30.43 billion USD</td>
-                        <td>£88.14 billion USD</td>
+                        <th scope="row">Total Revenue (Quarter)</th>
+                        <td>${{company1.total_revenue|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.total_revenue|format_large_number}} {{company2.currency}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Discounted Cash Flow Fair Value</th>
-                        <td>£175.74</td>
-                        <td>£566.04</td>
+                        <th scope="row">Gross Profit (Quarter)</th>
+                        <td>${{company1.gross_profit|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.gross_profit|format_large_number}} {{company2.currency}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Peter Lynch Fair Value</th>
-                        <td>£125.35</td>
-                        <td>£174.67</td>
+                        <th scope="row">Net Income (Quarter)</th>
+                        <td>${{company1.net_income|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.net_income|format_large_number}} {{company2.currency}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Economic Value Added Fair Value</th>
-                        <td>£125.25</td>
-                        <td>£126.67</td>
+                        <th scope="row">EBITDA (Quarter)</th>
+                        <td>${{company1.ebitda|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.ebitda|format_large_number}} {{company2.currency}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Average Fair Value</th>
-                        <td>£115.25</td>
-                        <td>£136.67</td>
+                        <th scope="row">Operating Margin (Year)</th>
+                        <td>{{company1.operating_margin}}%</td>
+                        <td>{{company2.operating_margin}}%</td>
                     </tr>
                     <tr>
-                        <th scope="row">Return on Equity</th>
-                        <td>15.07%</td>
-                        <td>32.83%</td>
+                        <th scope="row">Profit Margin (TTM)</th>
+                        <td>{{company1.profit_margin}}%</td>
+                        <td>{{company2.profit_margin}}%</td>
                     </tr>
                     <tr>
-                        <th scope="row">Profit Margin</th>
-                        <td>6.53%</td>
-                        <td>43.97%</td>
+                        <th scope="row">Quarterly Revenue Growth (YoY)</th>
+                        <td>{{company1.quarterly_revenue_growth}}%</td>
+                        <td>{{company2.quarterly_revenue_growth}}%</td>
                     </tr>
                     <tr>
-                        <th scope="row">Debt to Equity Ratio</th>
-                        <td>0.67</td>
-                        <td>0.31</td>
+                        <th scope="row">Quarterly Earnings Growth (YoY)</th>
+                        <td>{{company1.quarterly_earnings_growth}}%</td>
+                        <td>{{company2.quarterly_earnings_growth}}%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total Assets</th>
+                        <td>${{company1.total_assets|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.total_assets|format_large_number}} {{company2.currency}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total Liabilities</th>
+                        <td>${{company1.total_liabilities|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.total_liabilities|format_large_number}} {{company2.currency}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Shareholder Equity</th>
+                        <td>${{company1.shareholder_equity|format_large_number}} {{company1.currency}}</td>
+                        <td>${{company2.shareholder_equity|format_large_number}} {{company2.currency}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Current Asset To Liability Ratio</th>
+                        <td>{{company1.current_asset_to_liability_ratio}}</td>
+                        <td>{{company2.current_asset_to_liability_ratio}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Debt To Equity Ratio</th>
+                        <td>{{company1.debt_to_equity_ratio}}</td>
+                        <td>{{company2.debt_to_equity_ratio}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Earnings Per Share</th>
-                        <td>£4.78</td>
-                        <td>£12.17</td>
+                        <td>${{company1.eps}}</td>
+                        <td>${{company2.eps}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Annual Dividend</th>
-                        <td>£0</td>
-                        <td>£3.08</td>
+                        <th scope="row">Price To Sales Ratio</th>
+                        <td>{{company1.price_to_sales_ratio}}</td>
+                        <td>{{company2.price_to_sales_ratio}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Shareholders Yield</th>
-                        <td>0.29%</td>
-                        <td>0.55%</td>
+                        <th scope="row">EV To EBITDA</th>
+                        <td>{{company1.ev_to_ebitda}}</td>
+                        <td>{{company2.ev_to_ebitda}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Altman Z-Score</th>
-                        <td>5.58 (Indicates strong financial health)</td>
-                        <td>9.49 (Indicates strong financial health)</td>
+                        <th scope="row">52 Week High / Low</th>
+                        <td>${{company1.week_52_high|format_large_number}} / ${{company1.week_52_low|format_large_number}}</td>
+                        <td>${{company2.week_52_high|format_large_number}} / ${{company2.week_52_low|format_large_number}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">50 Day Moving Average</th>
+                        <td>${{company1.day_50_moving_average}}</td>
+                        <td>${{company2.day_50_moving_average}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">200 Day Moving Average</th>
+                        <td>${{company1.day_200_moving_average}}</td>
+                        <td>${{company2.day_200_moving_average}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Analyst Target Price</th>
+                        <td>${{company1.analyst_target_price}}</td>
+                        <td>${{company2.analyst_target_price}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Price To Earnings Fair Value</th>
+                        <td>${{company1.price_to_earnings_fair_value}}</td>
+                        <td>${{company2.price_to_earnings_fair_value}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Altman Z Score</th>
+                        <td>{{company1.altman_z_score}}</td>
+                        <td>{{company2.altman_z_score}}</td>
                     </tr>
                 </tbody>
             </table>          
@@ -147,7 +218,7 @@ StockForecaster: Stock Listings
         </div>
 
         <div class="data-item">
-            <div class="item-name">1. Amazon (AMZN)</div>
+            <div class="item-name">1. Amazon (AMZN)</div>   
             <ul class="item-information-list">
                 <li>Amazon hits record highs demand grows.</li>
                 <li>Positive for short and medium term as strong sales projetions may uplift share prices</li>
@@ -220,3 +291,14 @@ StockForecaster: Stock Listings
     </div>
 </section>
 {% endblock %}
+{% block scripts%}
+<script>
+    $(document).ready(function () {
+
+        // Auto-submit form when a Select2 dropdown changes
+        $('.select2').on("select2:select", function () {
+            $('#stock-comparison-form').submit();
+        });
+    });
+</script>
+{% endblock%}
