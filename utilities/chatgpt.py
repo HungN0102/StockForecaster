@@ -12,7 +12,7 @@ def calculate_article_impact_score(article_title, article_description):
     Given this news headline and description:
     - Title: {article_title}
     - Description: {article_description}
-    Does this news significantly impact global stock markets? If yes, provide a short explanation (max 50 words).
+    Does this news significantly impact global **stock markets**? If yes, provide a short explanation (max 50 words).
     From a score of 0 to 100, give me a score of how this news can impact the global stock market. 
     **Return only the score as a number, without any other text, explanation, or characters.**
     """

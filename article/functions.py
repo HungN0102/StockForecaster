@@ -15,19 +15,28 @@ from utilities.newsapi import *
 from utilities.alphavantage import *
 from utilities.utilities import *
 
-def insert_latest_hot_topics(last_hottopic, from_date, to_date):
+def insert_latest_hot_topics(from_date, to_date):
     try:
-        message =  "Init"
-        group_id = 1 if last_hottopic is None else last_hottopic.group_id + 1
+        message =  trace(f"Init insert_latest_hot_topics({from_date}, {to_date})")
+        check_hours_ago = 4
 
-        if validate_model_insert(last_hottopic, 4):
-            message = "Calling articles = get_hot_topics(%s, %s)" % (from_date, to_date)
+        message =  trace("Extracting the last inserted hot topic")
+        last_inserted_hottopic = HotTopic.objects.order_by('-created_at').first()
+
+        message =  trace("Getting the group id to prepare to create hot topic")
+        if last_inserted_hottopic is None:
+            group_id = 1
+        else:
+            group_id = last_inserted_hottopic.group_id + 1
+
+        if validate_model_insert(last_inserted_hottopic, check_hours_ago):
+            message = trace(f"Calling articles = get_hot_topics({from_date}, {to_date})")
             articles = get_hot_topics(from_date, to_date)
 
-            message = "Inserting articles to database"
-            print("Number of articles: %s" % len(articles))
+            message = trace(f"Inserting {len(articles)} articles to database")
             for article in articles:
-                print("Inserting Article: %s" % article["title"])
+                message = trace("Inserting Article: %s" % article["title"])
+
                 HotTopic.objects.create(
                     group_id = group_id,
                     title = article["title"],
@@ -51,50 +60,53 @@ def insert_latest_hot_topics(last_hottopic, from_date, to_date):
                     impact_3 = article["impact_3"],
                     stock_3 = article["stock_3"]
                 )
-            message = "Inserted hot topics to database"
+            message = trace("Finished inserting hot topics to database")
         else:
-            message = "Last hot topic isn't more than 4 hours ago, it was %s " % last_hottopic.created_at
+            message = trace("Last hot topic isn't more than 4 hours ago")
 
     except Exception as e:
-        message = str(e)
+        message = trace(str(e))
 
     return message
 
-def insert_latest_stock_listings(stock_listing, from_date, to_date):
+def insert_latest_stock_listings(from_date, to_date):
     try:
-        message =  "Init"
-        check_hours_ago = 24
-        group_id = 1
-        if stock_listing is not None:
-            group_id = stock_listing.group_id + 1
+        message =  trace(f"Init insert_latest_stock_listings({from_date}, {to_date})")
+        check_hours_ago = 0
 
-        if validate_model_insert(stock_listing, check_hours_ago):
-            print("Calling stock_listings = get_latest_ipo(%s, %s)" % (from_date, to_date))
-            message = "Calling stock_listings = get_latest_ipo(%s, %s)" % (from_date, to_date)
+        message =  trace("Extracting the last inserted hot stock listings")
+        last_inserted_stocklisting = StockListing.objects.order_by('-created_at').first()
+
+        if validate_model_insert(last_inserted_stocklisting, check_hours_ago):
+            message = trace(f"Delete all previous stock listings")
+            StockListing.objects.all().delete()
+
+            message = trace(f"Calling stock_listings = get_latest_ipo({from_date}, {to_date})") 
             stock_listings = get_latest_ipo(from_date, to_date)
 
-            message = "Inserting stock_listings to database"
-            print("Number of stock listings: %s" % len(stock_listings))
-            
+            message = trace(f"Inserting {len(stock_listings)} stock listings to database")        
             for stock_listing in stock_listings:
-                print("Inserting Stock Listings: %s" % stock_listing["name"])
-                StockListing.objects.create(
-                    group_id = group_id,
-                    date = stock_listing["date"],
-                    company = stock_listing["name"],
-                    code = stock_listing["symbol"],
-                    business_description = "",
-                    price_range = "$" + stock_listing["price"],
-                    total_shares_value = format_value(int(stock_listing["totalSharesValue"]), "$"),
-                    number_of_shares = format_value(int(stock_listing["numberOfShares"]), "")
-                )
+                try:
+                    message = trace(f"Inserting Stock Listings: {stock_listing["name"]}")
+                    StockListing.objects.create(
+                        group_id = 1,
+                        date = stock_listing["date"],
+                        company = stock_listing["name"],
+                        code = stock_listing["symbol"],
+                        business_description = "",
+                        price_range = "$" + stock_listing["price"],
+                        total_shares_value = format_value(int(stock_listing["totalSharesValue"]), "$"),
+                        number_of_shares = format_value(int(stock_listing["numberOfShares"]), "")
+                    )
+                except:
+                    trace(f"Failed inserting stock listing: {stock_listing["name"]}")
 
-            message = "Inserted Stock Listings to database"
+            message = trace("Inserted Stock Listings to database")
         else:
-            message = "Last Stock Listing isn't more than %s hours ago, it was %s " % (check_hours_ago, stock_listing.created_at)
+            message = trace(f"Last Stock Listing isn't more than {check_hours_ago} hours ago, it was")
 
     except Exception as e:
-        message = str(e)
+        message = trace(str(e))
 
     return message
 
@@ -107,13 +119,13 @@ def insert_latest_insider_transactions(symbol, from_date, to_date):
         company_db = Company.objects.filter(code=symbol).first()
 
         trace(f"Get old insider transaction with cod={symbol}")
-        last_insider_transaction_db = InsiderTransaction.objects.filter(company=company_db).first()
+        last_insider_transaction_db = InsiderTransaction.objects.filter(company=company_db)
 
-        if not validate_model_insert(last_insider_transaction_db, check_hours_ago):
+        if not validate_model_insert(last_insider_transaction_db.first(), check_hours_ago):
             raise Exception(f"Insider transaction {symbol} did not meet validation to insert")
         
         trace(f"Delete old insider transaction with cod={symbol}")
-        InsiderTransaction.objects.filter(cod=symbol).delete()
+        last_insider_transaction_db.delete()
 
         trace(f"Calling insider_transactions = get_latest_insider_transactions({symbol}, {from_date}, {to_date})")
         insider_transactions = get_latest_insider_transactions(symbol, from_date, to_date)
@@ -124,7 +136,7 @@ def insert_latest_insider_transactions(symbol, from_date, to_date):
 
             print(f"Inserting Insider Transactions: {insider_transaction["symbol"]}")
             InsiderTransaction.objects.create(
-                company = Company.objects.get(cod=insider_transaction["symbol"]),
+                company = Company.objects.get(code=symbol),
                 date = insider_transaction["filingDate"],
                 insider = insider_transaction["name"],
                 transaction_type = translate_insider_transaction(insider_transaction["transactionCode"], 
@@ -193,6 +205,81 @@ def insert_latest_company_information(symbol):
 
     return message
 
+
+# insert_latest_company_information("AAPL")
+# insert_latest_company_information("LUNR")
+# insert_latest_company_information("ORCL")
+# insert_latest_company_information("NVDA")
+# insert_latest_company_information("GOOGL")
+# insert_latest_company_information("JPM")
+# insert_latest_company_information("RARE")
+
+# insert_latest_company_information("NEE")
+# insert_latest_company_information("YETI")
+# insert_latest_company_information("MSFT")
+# insert_latest_company_information("AMZN")
+# insert_latest_company_information("AMD")
+# insert_latest_company_information("BAC")
+# insert_latest_company_information("BP")
+
+# insert_latest_company_information("CVS")
+# insert_latest_company_information("CEG")
+# insert_latest_company_information("GE")
+# insert_latest_company_information("VST")
+# insert_latest_company_information("FFIV")
+# insert_latest_company_information("SBUX")
+# insert_latest_company_information("MMM")
+
+# insert_latest_company_information("DVA")
+# insert_latest_company_information("META")
+# insert_latest_company_information("TPL")
+# insert_latest_company_information("PLTR")
+# insert_latest_company_information("TSLA")
+
+
+today = datetime.today().strftime("%Y-%m-%d")
+past_365days = (datetime.today() - timedelta(days=365)).strftime("%Y-%m-%d")
+past_2days = (datetime.today() - timedelta(days=2)).strftime("%Y-%m-%d")
+next_1month = (datetime.today() + timedelta(days=30)).strftime("%Y-%m-%d")
+last_1month = (datetime.today() - timedelta(days=30)).strftime("%Y-%m-%d")
+insert_latest_hot_topics(today, past_2days)
+insert_latest_stock_listings(last_1month, next_1month)
+########################################################
+################# Insider Transactions #################
+########################################################
+insert_latest_insider_transactions("AAPL", past_365days, today)
+insert_latest_insider_transactions("LUNR", past_365days, today)
+insert_latest_insider_transactions("ORCL", past_365days, today)
+insert_latest_insider_transactions("NVDA", past_365days, today)
+insert_latest_insider_transactions("GOOGL", past_365days, today)
+insert_latest_insider_transactions("JPM", past_365days, today)
+insert_latest_insider_transactions("RARE", past_365days, today)
+
+insert_latest_insider_transactions("NEE", past_365days, today)
+insert_latest_insider_transactions("YETI", past_365days, today)
+insert_latest_insider_transactions("MSFT", past_365days, today)
+insert_latest_insider_transactions("AMZN", past_365days, today)
+insert_latest_insider_transactions("AMD", past_365days, today)
+insert_latest_insider_transactions("BAC", past_365days, today)
+insert_latest_insider_transactions("BP", past_365days, today)
+
+insert_latest_insider_transactions("CVS", past_365days, today)
+insert_latest_insider_transactions("CEG", past_365days, today)
+insert_latest_insider_transactions("GE", past_365days, today)
+insert_latest_insider_transactions("VST", past_365days, today)
+insert_latest_insider_transactions("FFIV", past_365days, today)
+insert_latest_insider_transactions("SBUX", past_365days, today)
+insert_latest_insider_transactions("MMM", past_365days, today)
+
+insert_latest_insider_transactions("DVA", past_365days, today)
+insert_latest_insider_transactions("META", past_365days, today)
+insert_latest_insider_transactions("TPL", past_365days, today)
+insert_latest_insider_transactions("PLTR", past_365days, today)
+insert_latest_insider_transactions("TSLA", past_365days, today)
+
+####################################################################
+################# Insider Last Company Information #################
+####################################################################
 
 # insert_latest_company_information("AAPL")
 # insert_latest_company_information("LUNR")

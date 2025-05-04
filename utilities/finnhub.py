@@ -11,12 +11,12 @@ def get_latest_insider_transactions(symbol, from_date, to_date):
     import finnhub
     finnhub_client = finnhub.Client(api_key=FINNHUB_KEY)
 
-    insider_transactions = finnhub_client.stock_insider_transactions(symbol, from_date, to_date)
+    insider_transactions = finnhub_client.stock_insider_transactions(symbol, from_date, to_date)["data"]
     return insider_transactions
 
 
-# content = get_latest_insider_transactions("LUNR", "2025-01-01","2025-02-15")
+# content = get_latest_insider_transactions("AAPL", "2025-01-01","2025-02-15")
 
-# content["data"][1]
+# content[1]
 
 # -4528 * 19.6

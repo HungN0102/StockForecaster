@@ -54,11 +54,12 @@ def translate_insider_transaction(transactionCode, transactionPrice, isDerivativ
         return "Unknown transaction type"
     
 def format_value(num, currency):
-    if num > 1000000:
-        if not num % 1000000:
-            return f'{currency}{num // 1000000}M'
-        return f'{currency}{round(num / 1000000, 1)}M'
-    return f'{currency}{num // 1000}K'
+    sign = ""
+    if num < 0:
+        sign = "-"
+    if abs(num) > 1000000:
+        return f'{sign}{currency}{round(abs(num) / 1000000, 1)}M'
+    return f'{sign}{currency}{round(abs(num) / 1000)}K'
 
 def validate_model_insert(model, hours_ago):
     if model:
