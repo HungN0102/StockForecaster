@@ -16,6 +16,11 @@ StockForecaster: {{hot_topic}}
     <div class="result-header result-header--big">
         <h2>{{hot_topic.title}}</h2>
     </div>
+	<div class="mt-small copy-text">
+		<input type="text" class="text" value="{{hot_topic.article_url}}" />
+		<button><i class="fa fa-copy"></i></button>
+	</div>
+
     <span class="mt-small">{{hot_topic.description}}</span>
 
     <div class="result-data">
@@ -80,4 +85,7 @@ StockForecaster: {{hot_topic}}
     </div>
 
 </section>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/layout/copy.js' %}"></script>
 {% endblock %}
