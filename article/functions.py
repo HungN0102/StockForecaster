@@ -39,6 +39,7 @@ def insert_latest_hot_topics(from_date, to_date):
 
                 HotTopic.objects.create(
                     group_id = group_id,
+                    article_url = article["url"],
                     title = article["title"],
                     description = article["description"],
                     topic_1 = article["topic_1"],
@@ -243,39 +244,39 @@ past_2days = (datetime.today() - timedelta(days=2)).strftime("%Y-%m-%d")
 next_1month = (datetime.today() + timedelta(days=30)).strftime("%Y-%m-%d")
 last_1month = (datetime.today() - timedelta(days=30)).strftime("%Y-%m-%d")
 insert_latest_hot_topics(today, past_2days)
-insert_latest_stock_listings(last_1month, next_1month)
+# insert_latest_stock_listings(last_1month, next_1month)
 ########################################################
 ################# Insider Transactions #################
 ########################################################
-insert_latest_insider_transactions("AAPL", past_365days, today)
-insert_latest_insider_transactions("LUNR", past_365days, today)
-insert_latest_insider_transactions("ORCL", past_365days, today)
-insert_latest_insider_transactions("NVDA", past_365days, today)
-insert_latest_insider_transactions("GOOGL", past_365days, today)
-insert_latest_insider_transactions("JPM", past_365days, today)
-insert_latest_insider_transactions("RARE", past_365days, today)
+# insert_latest_insider_transactions("AAPL", past_365days, today)
+# insert_latest_insider_transactions("LUNR", past_365days, today)
+# insert_latest_insider_transactions("ORCL", past_365days, today)
+# insert_latest_insider_transactions("NVDA", past_365days, today)
+# insert_latest_insider_transactions("GOOGL", past_365days, today)
+# insert_latest_insider_transactions("JPM", past_365days, today)
+# insert_latest_insider_transactions("RARE", past_365days, today)
 
-insert_latest_insider_transactions("NEE", past_365days, today)
-insert_latest_insider_transactions("YETI", past_365days, today)
-insert_latest_insider_transactions("MSFT", past_365days, today)
-insert_latest_insider_transactions("AMZN", past_365days, today)
-insert_latest_insider_transactions("AMD", past_365days, today)
-insert_latest_insider_transactions("BAC", past_365days, today)
-insert_latest_insider_transactions("BP", past_365days, today)
+# insert_latest_insider_transactions("NEE", past_365days, today)
+# insert_latest_insider_transactions("YETI", past_365days, today)
+# insert_latest_insider_transactions("MSFT", past_365days, today)
+# insert_latest_insider_transactions("AMZN", past_365days, today)
+# insert_latest_insider_transactions("AMD", past_365days, today)
+# insert_latest_insider_transactions("BAC", past_365days, today)
+# insert_latest_insider_transactions("BP", past_365days, today)
 
-insert_latest_insider_transactions("CVS", past_365days, today)
-insert_latest_insider_transactions("CEG", past_365days, today)
-insert_latest_insider_transactions("GE", past_365days, today)
-insert_latest_insider_transactions("VST", past_365days, today)
-insert_latest_insider_transactions("FFIV", past_365days, today)
-insert_latest_insider_transactions("SBUX", past_365days, today)
-insert_latest_insider_transactions("MMM", past_365days, today)
+# insert_latest_insider_transactions("CVS", past_365days, today)
+# insert_latest_insider_transactions("CEG", past_365days, today)
+# insert_latest_insider_transactions("GE", past_365days, today)
+# insert_latest_insider_transactions("VST", past_365days, today)
+# insert_latest_insider_transactions("FFIV", past_365days, today)
+# insert_latest_insider_transactions("SBUX", past_365days, today)
+# insert_latest_insider_transactions("MMM", past_365days, today)
 
-insert_latest_insider_transactions("DVA", past_365days, today)
-insert_latest_insider_transactions("META", past_365days, today)
-insert_latest_insider_transactions("TPL", past_365days, today)
-insert_latest_insider_transactions("PLTR", past_365days, today)
-insert_latest_insider_transactions("TSLA", past_365days, today)
+# insert_latest_insider_transactions("DVA", past_365days, today)
+# insert_latest_insider_transactions("META", past_365days, today)
+# insert_latest_insider_transactions("TPL", past_365days, today)
+# insert_latest_insider_transactions("PLTR", past_365days, today)
+# insert_latest_insider_transactions("TSLA", past_365days, today)
 
 ####################################################################
 ################# Insider Last Company Information #################

@@ -80,6 +80,7 @@ def get_hot_topics(from_date, to_date):
     for article in articles:
         content = get_text_from_url(article["url"])
         chatgpt_result = json.loads(analyze_hot_topic(content))
+        chatgpt_result["url"] = article["url"]
         chatgpt_results.append(chatgpt_result)
 
 
